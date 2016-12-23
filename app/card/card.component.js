@@ -9,9 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var task_1 = require("../model/task");
 var CardComponent = (function () {
     function CardComponent() {
+        this.myEvent = new core_1.EventEmitter();
     }
+    CardComponent.prototype.statusToggle = function () {
+        this.task.completed = !this.task.completed;
+    };
+    CardComponent.prototype.triggerDelete = function () {
+        this.myEvent.emit({ task: this.task });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', task_1.Task)
+    ], CardComponent.prototype, "task", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CardComponent.prototype, "myEvent", void 0);
     CardComponent = __decorate([
         core_1.Component({
             selector: 'app-card',

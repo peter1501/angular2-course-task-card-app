@@ -9,13 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var task_1 = require("./model/task");
 var AppComponent = (function () {
     function AppComponent() {
+        this.tasks = [];
+        this.currentTask = new task_1.Task(null, false);
     }
+    AppComponent.prototype.addTask = function () {
+        var task = new task_1.Task(this.currentTask.content, this.currentTask.completed);
+        this.tasks.push(task);
+        this.currentTask = new task_1.Task(null, false);
+    };
+    AppComponent.prototype.deleteTask = function (task) {
+        var index = this.tasks.indexOf(task, 0);
+        if (index > -1) {
+            this.tasks.splice(index, 1);
+        }
+    };
     AppComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'my-app',
-            template: '<h1>Skeleton Project</h1>'
+            templateUrl: 'app.component.html',
+            styleUrls: ['app.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
